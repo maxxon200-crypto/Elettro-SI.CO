@@ -101,19 +101,24 @@ titoli grandi in Fraunces, whitespace come lusso. Espressivo ma ordinato.
 
 ---
 
-## 5. Animazioni
+## 5. Animazioni — minimali e a prova di errore
 
-Stack: **Lenis** (smooth scroll) + **GSAP** + **ScrollTrigger**. Solo `transform`/`opacity`.
+**Nessuna libreria esterna** (no GSAP, no Lenis, no ScrollTrigger). Un solo
+`assets/js/main.js`, difensivo. **Regola d'oro: il contenuto è SEMPRE visibile**;
+le animazioni sono solo un miglioramento e non possono mai nascondere nulla.
 
-- Hero: titolo Fraunces reveal a maschera (righe salgono da clip, stagger 60–80ms).
-- Reveal on scroll: `opacity 0→1` + `translateY(20→0)`, 600–800ms, stagger sui gruppi.
-- Count-up sulle stat ("1992", "30+").
-- **Una** sezione pinnata (Lavori): scrub orizzontale — il "momento wow".
-- Parallax leggero sulle immagini. Hairline `scaleX 0→1` all'ingresso.
-- Bottoni: hover-lift + underline animato. Sticky tap-to-call su mobile.
-- `prefers-reduced-motion: reduce` → niente scrub/parallax/transform; contenuto istantaneo.
+- Default in CSS: tutto visibile. Solo con `html.js` nascondiamo per animare;
+  se la JS non parte / va in errore → contenuto visibile al 100%.
+- Reveal on scroll: `IntersectionObserver` (fade-up sottile) + failsafe dopo `load`.
+- Entrata hero: **solo CSS** (`@keyframes`), non dipende dalla JS.
+- Count-up sulle stat ("1992", "30+"): fail-safe, mostra sempre il numero finale.
+- Scroll **nativo** (`scroll-behavior:smooth`), nessuno smooth-scroll con librerie.
+- Lavori: scroller orizzontale **CSS-only** (`scroll-snap`), nessun pinning.
+- Bottoni: hover-lift + underline animato (CSS). Sticky tap-to-call su mobile.
+- `prefers-reduced-motion: reduce` → tutto istantaneo e visibile.
 
 **Anti-circo:** il movimento rivela il contenuto, non decora il vuoto.
+**Anti-fragilità:** se un'animazione non può essere resa indistruttibile, si taglia.
 
 ---
 

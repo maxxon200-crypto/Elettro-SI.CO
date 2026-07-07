@@ -654,20 +654,27 @@ strong { font-weight: 600; }
   color: var(--on-dark-50);
 }
 
-/* ---- Lavori (galleria pinnata) ----------------------------------------- */
-.works { background: var(--forest-900); color: var(--on-dark); overflow: hidden; }
+/* ---- Lavori (scroller orizzontale CSS-only, zero JS, zero pinning) ------ */
+.works { background: var(--forest-900); color: var(--on-dark); }
 .works__intro { display: flex; justify-content: space-between; align-items: end; gap: 2rem; flex-wrap: wrap; margin-bottom: var(--space-7); }
-.works__pin { position: relative; }
 .works__track {
   display: flex;
   gap: clamp(1rem, 2.5vw, 2rem);
-  width: max-content;
-  will-change: transform;
-  padding-right: var(--gutter);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  /* allinea la prima card al contenuto; le altre sfiorano il bordo destro (bleed) */
+  padding: 4px var(--gutter) var(--space-4);
+  scroll-padding-left: var(--gutter);
+  scrollbar-width: thin;
+  scrollbar-color: var(--on-dark-50) transparent;
 }
+.works__track::-webkit-scrollbar { height: 6px; }
+.works__track::-webkit-scrollbar-thumb { background: var(--on-dark-50); border-radius: 999px; }
+.works__track::-webkit-scrollbar-track { background: transparent; }
 .work {
-  width: clamp(280px, 42vw, 560px);
-  flex: none;
+  flex: 0 0 min(84%, 460px);
+  scroll-snap-align: start;
 }
 .work .frame { aspect-ratio: 3 / 2; box-shadow: var(--shadow-lift); }
 .work__meta { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-top: var(--space-4); }
@@ -679,14 +686,6 @@ strong { font-weight: 600; }
   font-family: var(--font-mono); font-size: .75rem; letter-spacing: .1em; text-transform: uppercase;
   color: var(--on-dark-50);
 }
-/* fallback: quando non pinnato (mobile/reduced) → scroll orizzontale nativo */
-.works__pin.is-static .works__track {
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: 8px;
-}
-.works__pin.is-static .work { scroll-snap-align: start; }
 
 /* ---- Chi siamo / ritratto ---------------------------------------------- */
 .about__portraits { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1rem, 2vw, 1.5rem); }
@@ -844,24 +843,27 @@ strong { font-weight: 600; }
 .callbar .btn--wa { background: var(--forest-500); color: var(--on-dark); }
 @media (max-width: 760px) { .callbar { display: flex; } }
 
-/* ---- Cookie banner ------------------------------------------------------ */
+/* ---- Cookie banner (in basso a SINISTRA) ------------------------------- */
 .cookie {
   position: fixed;
-  left: 12px; right: 12px; bottom: 12px;
+  left: 24px; bottom: 24px; right: auto;
   z-index: var(--z-cookie);
-  max-width: 560px;
-  margin-inline: auto;
+  width: min(380px, calc(100vw - 48px));
   background: var(--paper);
   border: 1px solid var(--line);
   border-radius: var(--r-card);
   box-shadow: var(--shadow-lift);
-  padding: clamp(1.25rem, 3vw, 1.75rem);
-  transform: translateY(160%);
+  padding: clamp(1.25rem, 3vw, 1.6rem);
+  transform: translateY(24px);
   opacity: 0;
   transition: transform var(--dur-3) var(--ease-out), opacity var(--dur-3) var(--ease-out);
 }
 .cookie.is-open { transform: translateY(0); opacity: 1; }
 .cookie[hidden] { display: none; }
+/* Sotto i 760px la tap-to-call è presente in basso: impila il banner sopra. */
+@media (max-width: 760px) {
+  .cookie { left: 16px; right: 16px; width: auto; bottom: 84px; }
+}
 .cookie__title { font-family: var(--font-display); font-weight: 500; font-size: 1.25rem; color: var(--forest-700); margin-bottom: 8px; }
 .cookie__text { font-size: 1rem; color: var(--graphite-70); line-height: 1.5; }
 .cookie__text a { color: var(--forest-700); text-decoration: underline; text-underline-offset: 2px; }
@@ -971,18 +973,38 @@ strong { font-weight: 600; }
 }
 
 /* ==========================================================================
-   Motion base — stati iniziali per il reveal (GSAP li anima).
-   Se JS non parte o reduced-motion: tutto resta visibile.
+   Motion — REVEAL A PROVA DI ERRORE
+   Default (CSS puro): tutto VISIBILE. Solo quando la JS conferma (html.js)
+   nascondiamo per animare; l'IntersectionObserver riaggiunge .is-visible.
+   Se la JS si spegne o va in errore → nessun .js → contenuto sempre visibile.
    ========================================================================== */
-.js .anim { opacity: 0; }
-.js .anim-up { opacity: 0; transform: translateY(20px); }
-.js .reveal-lines .line > span { transform: translateY(105%); }
+.anim, .anim-up { opacity: 1; transform: none; }
+
+html.js .anim { opacity: 0; transition: opacity .6s var(--ease-out); }
+html.js .anim-up { opacity: 0; transform: translateY(16px); transition: opacity .6s var(--ease-out), transform .6s var(--ease-out); }
+html.js .anim.is-visible, html.js .anim-up.is-visible { opacity: 1; transform: none; }
+
+/* micro-stagger per i gruppi (puro CSS, non può rompersi) */
+html.js [data-stagger] > *:nth-child(2) { transition-delay: .06s; }
+html.js [data-stagger] > *:nth-child(3) { transition-delay: .12s; }
+html.js [data-stagger] > *:nth-child(4) { transition-delay: .18s; }
+html.js [data-stagger] > *:nth-child(5) { transition-delay: .24s; }
+html.js [data-stagger] > *:nth-child(6) { transition-delay: .30s; }
+
+/* Entrata hero: SOLO CSS (nessuna dipendenza da JS, non può nascondersi).
+   Con reduced-motion non parte → hero istantaneo e visibile. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero__title .line > span { animation: esRise .9s var(--ease-expo) both; }
+  .hero__title .line:nth-child(1) > span { animation-delay: .06s; }
+  .hero__title .line:nth-child(2) > span { animation-delay: .14s; }
+  .hero__title .line:nth-child(3) > span { animation-delay: .22s; }
+  .hero__enter { animation: esFadeUp .8s var(--ease-out) .34s both; }
+}
+@keyframes esRise { from { transform: translateY(105%); } to { transform: none; } }
+@keyframes esFadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 
 @media (prefers-reduced-motion: reduce) {
-  .js .anim, .js .anim-up, .js .reveal-lines .line > span {
-    opacity: 1 !important;
-    transform: none !important;
-  }
+  html.js .anim, html.js .anim-up { opacity: 1 !important; transform: none !important; transition: none; }
   .mark .mark__ul path { stroke-dashoffset: 0 !important; }
   * { scroll-behavior: auto !important; }
 }

@@ -23,12 +23,12 @@
   --line-dark:  rgba(237, 231, 216, .16); /* hairline su fondo scuro */
 
   /* ---- Tipografia -------------------------------------------------------- */
-  --font-display: "Fraunces", "Times New Roman", serif;
-  --font-body: "Switzer", "Hanken Grotesk", ui-sans-serif, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
-  /* variation settings dei titoli grandi (Fraunces): calore ottico */
-  --fraunces-soft: "SOFT" 30, "WONK" 0, "opsz" 144;
+  /* ottica dei titoli grandi (Fraunces, asse opsz) — no-op se l'asse non carica */
+  --fraunces-soft: "opsz" 96;
 
   /* scala fluida, base 18px */
   --fs-eyebrow: .8125rem;                                  /* mono, uppercase, ls .1em */

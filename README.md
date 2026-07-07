@@ -76,16 +76,22 @@ Vedi `initForm()` in `assets/js/main.js`.
 - Le pagine `privacy.html` e `cookie.html` sono **template**: vanno verificate da un professionista
   e completate (P.IVA, date, tempi di conservazione, fornitori effettivi).
 
-## Animazioni
-`Lenis` (smooth scroll) + `GSAP` + `ScrollTrigger` via CDN. Effetti solo su `transform`/`opacity`.
-Tutto degrada con `prefers-reduced-motion: reduce` (niente scrub/parallax, contenuto istantaneo)
-e funziona anche senza JS (contenuto visibile). Per self-hostare le librerie, scaricale in
-`assets/js/vendor/` e aggiorna i `<script src>`.
+## Animazioni (minimali, a prova di errore)
+**Nessuna libreria esterna** (niente GSAP, niente Lenis, niente ScrollTrigger). Un solo file
+`assets/js/main.js`, difensivo. Principio: **il contenuto è sempre visibile**; le animazioni sono
+solo un miglioramento e non possono mai nascondere nulla.
+- **Reveal** via `IntersectionObserver` (fade-up sottile) con doppio failsafe: se la JS non parte
+  o va in errore, `html` non riceve la classe `js` → gli elementi `.anim`/`.anim-up` restano
+  visibili al 100%. Un timeout dopo il `load` mostra comunque tutto.
+- **Entrata hero**: solo CSS (`@keyframes`), non dipende dalla JS.
+- **Scroll**: nativo (`scroll-behavior:smooth`), nessuno smooth-scroll con librerie.
+- **Lavori**: scroller orizzontale **CSS-only** (`scroll-snap`), nessun pinning.
+- `prefers-reduced-motion: reduce` → tutto istantaneo e visibile.
 
 ## Font
-- **Fraunces** (display) e **JetBrains Mono** (label) via Google Fonts.
-- **Switzer** (corpo) via Fontshare, con fallback **Hanken Grotesk**.
-- Caricati con `preconnect` + `font-display:swap`. Nessun uso di Inter/Roboto/Arial.
+- **Fraunces** (display), **Hanken Grotesk** (corpo) e **JetBrains Mono** (label), tutti via
+  **Google Fonts** (un solo host, affidabile), con `preconnect` + `font-display:swap`.
+- **Nessun uso di Inter/Roboto/Arial** come font del brand.
 - Per la massima performance si possono self-hostare/subsettare i font in `assets/fonts/`.
 
 ## Deploy su Vercel

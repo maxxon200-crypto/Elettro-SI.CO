@@ -18,13 +18,10 @@
 <!-- Favicon: mark geometrico minimale (inline, nessuna richiesta) -->
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 34'%3E%3Crect width='34' height='34' rx='8' fill='%2314261F'/%3E%3Cpath d='M11 9h12M11 17h9M11 25h12' stroke='%23F4EFE6' stroke-width='2.2' stroke-linecap='round'/%3E%3Ccircle cx='24.5' cy='17' r='1.8' fill='%23C9A84C'/%3E%3C/svg%3E">
 
-<!-- Fonts: Fraunces (display) + JetBrains Mono (label) via Google, Switzer (corpo) via Fontshare -->
+<!-- Fonts (Google): Fraunces (display) + Hanken Grotesk (corpo) + JetBrains Mono (label). Nessun Inter. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://api.fontshare.com">
-<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..600,0..100,0..1;1,9..144,400..600,0..100,0..1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=Hanken+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="assets/css/tokens.css">
 <link rel="stylesheet" href="assets/css/styles.css">
@@ -102,8 +99,8 @@
 <main id="main">
 
   <!-- ============================ HERO ============================ -->
-  <section class="hero" data-hero aria-label="Introduzione">
-    <div class="hero__bg" data-hero-parallax>
+  <section class="hero" aria-label="Introduzione">
+    <div class="hero__bg">
       <!-- SOSTITUIRE con foto reale full-bleed (grading verde). Vedi README.
            <img class="hero__bg-photo" src="assets/img/hero.avif" alt="" fetchpriority="high"> -->
       <div class="hero__bg-photo" role="img" aria-label=""
@@ -114,22 +111,22 @@
     </div>
 
     <div class="hero__inner">
-      <p class="eyebrow anim-up" data-hero-fade>Sesto San Giovanni · Milano · Monza e Brianza</p>
+      <p class="eyebrow hero__enter">Sesto San Giovanni · Milano · Monza e Brianza</p>
       <h1 class="hero__title reveal-lines">
         <span class="line"><span>Impianti elettrici</span></span>
         <span class="line"><span>a regola d'arte,</span></span>
         <span class="line"><span>dal <span class="em">1992</span>.</span></span>
       </h1>
-      <p class="hero__sub anim-up" data-hero-fade>
+      <p class="hero__sub hero__enter">
         Civili e industriali, messa a norma e ricerca guasti. Due elettricisti,
         un solo standard: lavoro pulito, certificato e fatto per durare.
       </p>
-      <div class="hero__cta">
-        <a class="btn btn--primary anim-up" data-hero-fade href="tel:+393386577175">
+      <div class="hero__cta hero__enter">
+        <a class="btn btn--primary" href="tel:+393386577175">
           <svg class="btn__ico" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6.5 3.5 9 4l1 3.5-2 1.5a12 12 0 0 0 5 5l1.5-2 3.5 1 .5 2.5c0 1-1 2-2.2 2A15.8 15.8 0 0 1 4.5 5.7C4.5 4.5 5.5 3.5 6.5 3.5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
           Chiama ora
         </a>
-        <a class="btn btn--secondary anim-up" data-hero-fade href="#contatti">Richiedi un sopralluogo gratuito</a>
+        <a class="btn btn--secondary" href="#contatti">Richiedi un sopralluogo gratuito</a>
       </div>
     </div>
     <div class="hero__scroll" aria-hidden="true">Scorri <span>↓</span></div>
@@ -228,7 +225,7 @@
           </div>
         </div>
       </div>
-      <hr class="rule mt-7" data-rule aria-hidden="true">
+      <hr class="rule mt-7" aria-hidden="true">
     </div>
   </section>
 
@@ -244,12 +241,12 @@
       </div>
     </div>
 
-    <div class="works__pin" data-works-pin>
-      <div class="works__track" data-works-track>
+    <div class="works__pin">
+      <div class="works__track">
         <!-- Ogni frame è un placeholder trattato. SOSTITUIRE con foto reali (README). -->
         <article class="work">
           <figure class="frame frame--wide">
-            <span class="frame__fill" data-parallax="6"></span>
+            <span class="frame__fill"></span>
             <span class="frame__light"></span><span class="frame__grain"></span><span class="frame__ring"></span>
             <span class="frame__note">placeholder</span>
             <figcaption class="frame__chip"><span class="dot"></span>Quadro elettrico civile</figcaption>
@@ -263,7 +260,7 @@
 
         <article class="work">
           <figure class="frame frame--wide">
-            <span class="frame__fill" data-parallax="6"></span>
+            <span class="frame__fill"></span>
             <span class="frame__light"></span><span class="frame__grain"></span><span class="frame__ring"></span>
             <span class="frame__note">placeholder</span>
             <figcaption class="frame__chip"><span class="dot"></span>Cablaggio industriale</figcaption>
@@ -277,7 +274,7 @@
 
         <article class="work">
           <figure class="frame frame--wide">
-            <span class="frame__fill" data-parallax="6"></span>
+            <span class="frame__fill"></span>
             <span class="frame__light"></span><span class="frame__grain"></span><span class="frame__ring"></span>
             <span class="frame__note">placeholder</span>
             <figcaption class="frame__chip"><span class="dot"></span>Illuminazione LED</figcaption>
@@ -291,7 +288,7 @@
 
         <article class="work">
           <figure class="frame frame--wide">
-            <span class="frame__fill" data-parallax="6"></span>
+            <span class="frame__fill"></span>
             <span class="frame__light"></span><span class="frame__grain"></span><span class="frame__ring"></span>
             <span class="frame__note">placeholder</span>
             <figcaption class="frame__chip"><span class="dot"></span>Certificato DiRi</figcaption>
@@ -344,12 +341,12 @@
         <div class="col-5 push-1">
           <div class="about__portraits">
             <figure class="frame frame--tall anim-up">
-              <span class="frame__fill" data-parallax="7"></span>
+              <span class="frame__fill"></span>
               <span class="frame__light"></span><span class="frame__grain"></span><span class="frame__ring"></span>
               <figcaption class="frame__chip"><span class="dot"></span>Giovanni C.</figcaption>
             </figure>
             <figure class="frame frame--tall anim-up" style="margin-top:2.5rem">
-              <span class="frame__fill" data-parallax="7"></span>
+              <span class="frame__fill"></span>
               <span class="frame__light"></span><span class="frame__grain"></span><span class="frame__ring"></span>
               <figcaption class="frame__chip"><span class="dot"></span>Giovanni S.</figcaption>
             </figure>
@@ -593,10 +590,8 @@
 </aside>
 
 <!-- ============================ SCRIPTS ============================ -->
-<!-- Lenis + GSAP + ScrollTrigger (CDN). main.js degrada senza queste librerie. -->
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+<!-- Un solo file JS, difensivo. Nessuna libreria esterna. Il sito resta
+     perfettamente leggibile anche se questo script non parte. -->
 <script defer src="assets/js/main.js"></script>
 </body>
 </html>
