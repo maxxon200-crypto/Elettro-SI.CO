@@ -1,0 +1,101 @@
+/* ==========================================================================
+   Elettro SI.CO — DESIGN TOKENS (fonte unica di verità)
+   Nessun colore / font / spazio va hardcodato nelle pagine: usare var(--...).
+   Vedi DESIGN.md.
+   ========================================================================== */
+
+:root {
+  /* ---- Colore: verde bottiglia + panna + grafite + ottone ---------------- */
+  --forest-900: #14261F;   /* sezioni scure */
+  --forest-700: #1F3D34;   /* brand / ink principale, titoli */
+  --forest-500: #2F5B4C;   /* secondario, hover */
+  --cream:      #F4EFE6;   /* sfondo pagina */
+  --paper:      #FAF9F6;   /* card / superfici */
+  --graphite:   #1A1A1A;   /* testo corpo */
+  --graphite-70: rgba(26, 26, 26, .70);
+  --graphite-50: rgba(26, 26, 26, .50);
+  --line:        rgba(20, 38, 31, .14);   /* hairline */
+  --brass:      #C9A84C;   /* accento — uso parco: righe, marchi. Mai testo lungo */
+  --brass-600:  #B2913A;   /* hover ottone */
+  --on-dark:    #EDE7D8;   /* testo su verde scuro */
+  --on-dark-70: rgba(237, 231, 216, .72);
+  --on-dark-50: rgba(237, 231, 216, .50);
+  --line-dark:  rgba(237, 231, 216, .16); /* hairline su fondo scuro */
+
+  /* ---- Tipografia -------------------------------------------------------- */
+  --font-display: "Fraunces", "Times New Roman", serif;
+  --font-body: "Switzer", "Hanken Grotesk", ui-sans-serif, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  /* variation settings dei titoli grandi (Fraunces): calore ottico */
+  --fraunces-soft: "SOFT" 30, "WONK" 0, "opsz" 144;
+
+  /* scala fluida, base 18px */
+  --fs-eyebrow: .8125rem;                                  /* mono, uppercase, ls .1em */
+  --fs-body:  clamp(1.0625rem, 1rem + .3vw, 1.1875rem);   /* lh 1.6 — min 17px */
+  --fs-lead:  clamp(1.1875rem, 1.05rem + .5vw, 1.375rem); /* paragrafi guida, --graphite-70 */
+  --fs-h3:    clamp(1.375rem, 1.2rem + .6vw, 1.75rem);
+  --fs-h2:    clamp(2rem, 1.6rem + 2vw, 3rem);            /* Fraunces */
+  --fs-h1:    clamp(2.5rem, 1.9rem + 3vw, 4rem);          /* Fraunces */
+  --fs-display: clamp(3rem, 2rem + 5vw, 6rem);            /* Fraunces, lh 1.02 */
+  --fs-quote: clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem);     /* Fraunces italic */
+
+  --lh-tight: 1.02;
+  --lh-title: 1.08;
+  --lh-body: 1.6;
+  --ls-tight: -.015em;
+  --ls-eyebrow: .1em;
+
+  /* ---- Spazio (scala 8pt) ------------------------------------------------ */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px;
+  --space-11: 192px;
+
+  /* padding di sezione: TOP ridotto per evitare il gap morto sotto i titoli */
+  --section-pad: clamp(5rem, 9vw, 9rem);
+  --section-pad-top: clamp(3rem, 5vw, 5rem);
+
+  /* layout */
+  --maxw: 1240px;         /* contenitore principale */
+  --maxw-prose: 68ch;     /* colonna di lettura */
+  --gutter: clamp(1.25rem, 5vw, 4rem);
+  --header-h: 76px;
+
+  /* ---- Raggi ------------------------------------------------------------- */
+  --r-control: 8px;   /* SOLO bottoni/input */
+  --r-card: 12px;     /* card interattive */
+  /* blocchi editoriali: raggio 0, feel "stampato" */
+
+  /* ---- Ombre (quasi assenti) -------------------------------------------- */
+  --shadow-soft: 0 12px 40px -12px rgba(20, 38, 31, .18);  /* solo elemento sollevato */
+  --shadow-lift: 0 20px 50px -18px rgba(20, 38, 31, .28);  /* hover del frame */
+
+  /* ---- Bottoni (regola MUST: mai piccoli) -------------------------------- */
+  --btn-min-h: 48px;
+  --btn-pad-y: 14px;
+  --btn-pad-x: 28px;
+  --btn-fs: 1rem;        /* 16px */
+  --btn-fw: 600;
+  --tap-min: 44px;       /* tap target minimo assoluto */
+
+  /* ---- Motion ------------------------------------------------------------ */
+  --ease-out: cubic-bezier(.22, 1, .36, 1);
+  --ease-expo: cubic-bezier(.16, 1, .3, 1);
+  --dur-1: 200ms;
+  --dur-2: 350ms;
+  --dur-3: 600ms;
+  --dur-4: 800ms;
+
+  --z-header: 100;
+  --z-callbar: 90;
+  --z-cookie: 200;
+  --z-overlay: 300;
+}
